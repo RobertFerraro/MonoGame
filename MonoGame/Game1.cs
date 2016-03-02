@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace MonoGame
     {
@@ -11,14 +12,28 @@ namespace MonoGame
         {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private SpriteFont font;
+        List<DisplayMode> displayModeList = new List<DisplayMode>();
+
 
         public Game1()
             {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            foreach (DisplayMode displayMode in GraphicsAdapter.DefaultAdapter.SupportedDisplayModes)
+                {
+                if ( ! displayModeList.Contains(displayMode) && displayMode.RefreshRate>=60)
+                    //displayMode.Height >= 1080 && displayMode.Width >= 1920 && displayMode.RefreshRate>=60)
+                    {
+                    displayModeList.Add(displayMode);
+                    }
+                }
+
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
+
+            graphics.ApplyChanges();
             }
 
         /// <summary>
@@ -42,6 +57,8 @@ namespace MonoGame
             {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            font = Content.Load<SpriteFont>("myfont");
 
             // TODO: use this.Content to load your game content here
             }
@@ -79,6 +96,21 @@ namespace MonoGame
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            int y = 5;
+            foreach (DisplayMode displayMode in displayModeList)
+                {
+                spriteBatch.DrawString(font,
+                    displayMode.Width.ToString() + "x" +
+                    displayMode.Height.ToString() + "-" +
+                    displayMode.Format.ToString() + " @ " +
+                    displayMode.RefreshRate.ToString() + "Hz",
+                    new Vector2(0, y), Color.Azure);
+                y += 10;
+                }
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
             }
