@@ -23,10 +23,18 @@ namespace MonoGame
 
             foreach (DisplayMode displayMode in GraphicsAdapter.DefaultAdapter.SupportedDisplayModes)
                 {
-                if ( ! displayModeList.Contains(displayMode) && displayMode.RefreshRate>=60)
-                    //displayMode.Height >= 1080 && displayMode.Width >= 1920 && displayMode.RefreshRate>=60)
+                //displayModeList.Contains(x => (x.Height == displayMode.Height && x.Width == displayMode.Width))
+                if (displayModeList.Find(x => x.Height == displayMode.Height) == null)
                     {
-                    displayModeList.Add(displayMode);
+                    if (displayModeList.Find(y => y.Width == displayMode.Width) == null)
+                        {
+
+                        //if ( ! displayModeList.Contains(displayMode) && displayMode.RefreshRate>=60)
+                        //displayMode.Height >= 1080 && displayMode.Width >= 1920 && displayMode.RefreshRate>=60)
+                        //  {
+                        displayModeList.Add(displayMode);
+                        //}
+                        }
                     }
                 }
 
