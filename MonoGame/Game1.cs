@@ -29,11 +29,11 @@ namespace MonoGame
                     if (displayModeList.Find(y => y.Width == displayMode.Width) == null)
                         {
 
-                        //if ( ! displayModeList.Contains(displayMode) && displayMode.RefreshRate>=60)
+                        if ( displayMode.RefreshRate>=60)
                         //displayMode.Height >= 1080 && displayMode.Width >= 1920 && displayMode.RefreshRate>=60)
-                        //  {
-                        displayModeList.Add(displayMode);
-                        //}
+                            {
+                            displayModeList.Add(displayMode);
+                            }
                         }
                     }
                 }
