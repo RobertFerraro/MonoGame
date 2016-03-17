@@ -29,7 +29,7 @@ namespace MonoGame
                     if (displayModeList.Find(y => y.Width == displayMode.Width) == null)
                         {
 
-                        if ( displayMode.RefreshRate>=60)
+                        //if ( displayMode.RefreshRate>=60)
                         //displayMode.Height >= 1080 && displayMode.Width >= 1920 && displayMode.RefreshRate>=60)
                             {
                             displayModeList.Add(displayMode);
@@ -112,8 +112,8 @@ namespace MonoGame
                 spriteBatch.DrawString(font,
                     displayMode.Width.ToString() + "x" +
                     displayMode.Height.ToString() + "-" +
-                    displayMode.Format.ToString() + " @ " +
-                    displayMode.RefreshRate.ToString() + "Hz",
+                    displayMode.Format.ToString() + " @ ",
+                   // displayMode.RefreshRate.ToString() + "Hz",
                     new Vector2(0, y), Color.Azure);
                 y += 10;
                 }
